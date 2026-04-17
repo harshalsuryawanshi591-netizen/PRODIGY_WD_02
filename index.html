@@ -1,0 +1,588 @@
+<artifact identifier="responsive-landing-page" type="text/html"
+    title="Responsive Landing Page with Interactive Navigation">
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <base target="_self">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modern Landing | Responsive Design</title>
+        <meta name="description"
+            content="A responsive landing page with interactive navigation menu that changes on scroll and hover">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            primary: "#3b82f6",
+                            secondary: "#1e40af",
+                            accent: "#f59e0b",
+                            dark: "#1f2937",
+                            light: "#f8fafc"
+                        },
+                        fontFamily: {
+                            'sans': ['Inter', 'system-ui', 'sans-serif'],
+                            'display': ['Poppins', 'system-ui', 'sans-serif']
+                        },
+                        animation: {
+                            'fade-in': 'fadeIn 0.5s ease-in-out',
+                            'slide-down': 'slideDown 0.3s ease-out'
+                        },
+                        keyframes: {
+                            fadeIn: {
+                                '0%': { opacity: '0' },
+                                '100%': { opacity: '1' }
+                            },
+                            slideDown: {
+                                '0%': { transform: 'translateY(-10px)', opacity: '0' },
+                                '100%': { transform: 'translateY(0)', opacity: '1' }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+            .nav-scrolled {
+                background-color: rgba(255, 255, 255, 0.95) !important;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+
+            .nav-item-active {
+                color: #3b82f6 !important;
+                font-weight: 600;
+            }
+
+            .mobile-menu-open {
+                max-height: 500px !important;
+                opacity: 1 !important;
+            }
+
+            .section-active {
+                border-left: 3px solid #3b82f6;
+                padding-left: 12px;
+            }
+        </style>
+    </head>
+
+    <body class="min-h-screen bg-white font-sans text-gray-800">
+        <!-- Navigation -->
+        <nav id="main-nav"
+            class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm transition-all duration-300 ease-in-out">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center">
+                        <a href="#home"
+                            class="flex items-center space-x-2 text-xl font-display font-bold text-dark hover:text-primary transition-colors">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold">M</span>
+                            </div>
+                            <span>ModernLand</span>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:block">
+                        <ul id="desktop-nav-list" class="flex items-center space-x-1"></ul>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="hidden md:block">
+                        <button id="cta-button"
+                            class="px-6 py-2 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition-all duration-300 transform hover:-translate-y-0.5 shadow-md hover:shadow-lg">
+                            Get Started
+                        </button>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-gray-700 hover:text-primary focus:outline-none">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div id="mobile-menu"
+                    class="md:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
+                    <ul id="mobile-nav-list" class="py-4 space-y-3"></ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Hero Section -->
+            <section id="home" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-light to-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h1
+                            class="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-dark mb-6 animate-fade-in">
+                            Build Amazing Digital Experiences
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                            Create responsive, interactive websites with our modern tools and frameworks. Perfect for
+                            developers and designers alike.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button
+                                class="px-8 py-3 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                                Start Free Trial
+                            </button>
+                            <button
+                                class="px-8 py-3 border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:border-primary hover:text-primary transition-all duration-300">
+                                View Demo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="py-16 md:py-24 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-dark mb-4">Powerful Features</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Everything you need to build modern, responsive
+                            websites</p>
+                    </div>
+                    <div id="features-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="py-16 md:py-24 bg-gray-50">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-dark mb-4">What Our Users Say</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Join thousands of satisfied developers and designers
+                        </p>
+                    </div>
+                    <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+                </div>
+            </section>
+
+            <!-- Pricing Section -->
+            <section id="pricing" class="py-16 md:py-24 bg-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-display font-bold text-dark mb-4">Simple, Transparent
+                            Pricing</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Choose the plan that's right for your project</p>
+                    </div>
+                    <div id="pricing-cards" class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto"></div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-16 md:py-24 bg-gradient-to-br from-primary to-secondary text-white">
+                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-2xl mx-auto text-center">
+                        <h2 class="text-3xl md:text-4xl font-display font-bold mb-6">Ready to Get Started?</h2>
+                        <p class="text-lg mb-10 opacity-90">Join our community of developers building the future of the
+                            web</p>
+                        <form class="space-y-6 max-w-md mx-auto">
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <input type="email" placeholder="Your email address"
+                                    class="flex-grow px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-accent">
+                                <button type="submit"
+                                    class="px-6 py-3 bg-accent text-white font-medium rounded-lg hover:bg-yellow-600 transition-colors">
+                                    Subscribe
+                                </button>
+                            </div>
+                            <p class="text-sm opacity-75">No spam, unsubscribe at any time</p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-8 md:mb-0">
+                        <div class="flex items-center space-x-2 text-xl font-display font-bold mb-4">
+                            <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold">M</span>
+                            </div>
+                            <span>ModernLand</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Building the future of web development</p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-6">
+                        <ul id="footer-links" class="flex flex-wrap gap-6"></ul>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-twitter text-lg"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-github text-lg"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-linkedin text-lg"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fab fa-discord text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+                    <p>&copy; 2024 ModernLand. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // Data Layer
+            const navigationItems = [
+                { "id": "home", "label": "Home", "href": "#home", "icon": "fas fa-home" },
+                { "id": "features", "label": "Features", "href": "#features", "icon": "fas fa-star" },
+                { "id": "testimonials", "label": "Testimonials", "href": "#testimonials", "icon": "fas fa-comment" },
+                { "id": "pricing", "label": "Pricing", "href": "#pricing", "icon": "fas fa-tag" },
+                { "id": "contact", "label": "Contact", "href": "#contact", "icon": "fas fa-envelope" }
+            ];
+
+            const features = [
+                {
+                    "title": "Responsive Design",
+                    "description": "Build websites that look great on all devices with our responsive framework.",
+                    "icon": "fas fa-mobile-alt",
+                    "color": "text-blue-500"
+                },
+                {
+                    "title": "Interactive Components",
+                    "description": "Pre-built interactive components that work seamlessly across all browsers.",
+                    "icon": "fas fa-mouse-pointer",
+                    "color": "text-green-500"
+                },
+                {
+                    "title": "Performance Optimized",
+                    "description": "Lightweight code and optimized assets for fast loading times.",
+                    "icon": "fas fa-bolt",
+                    "color": "text-yellow-500"
+                },
+                {
+                    "title": "Easy Customization",
+                    "description": "Customize every aspect with our intuitive configuration system.",
+                    "icon": "fas fa-sliders-h",
+                    "color": "text-purple-500"
+                },
+                {
+                    "title": "SEO Friendly",
+                    "description": "Built with SEO best practices to help your site rank higher.",
+                    "icon": "fas fa-search",
+                    "color": "text-red-500"
+                },
+                {
+                    "title": "24/7 Support",
+                    "description": "Get help whenever you need it with our dedicated support team.",
+                    "icon": "fas fa-headset",
+                    "color": "text-indigo-500"
+                }
+            ];
+
+            const testimonials = [
+                {
+                    "name": "Alex Johnson",
+                    "role": "Frontend Developer",
+                    "company": "TechCorp",
+                    "content": "This platform has revolutionized how we build websites. The interactive components save us hours of development time.",
+                    "avatar": "https://picsum.photos/100?random=1",
+                    "rating": 5
+                },
+                {
+                    "name": "Sarah Chen",
+                    "role": "UI/UX Designer",
+                    "company": "DesignStudio",
+                    "content": "The responsive design tools are incredible. I can create beautiful layouts that work perfectly on any device.",
+                    "avatar": "https://picsum.photos/100?random=2",
+                    "rating": 5
+                },
+                {
+                    "name": "Michael Rodriguez",
+                    "role": "Product Manager",
+                    "company": "StartupXYZ",
+                    "content": "Our team's productivity has increased by 40% since switching to this platform. Highly recommended!",
+                    "avatar": "https://picsum.photos/100?random=3",
+                    "rating": 4
+                }
+            ];
+
+            const pricingPlans = [
+                {
+                    "name": "Starter",
+                    "price": "$19",
+                    "period": "/month",
+                    "description": "Perfect for small projects and personal websites",
+                    "features": ["Up to 5 pages", "Basic components", "Email support", "1GB storage", "Community access"],
+                    "highlight": false,
+                    "cta": "Get Started"
+                },
+                {
+                    "name": "Professional",
+                    "price": "$49",
+                    "period": "/month",
+                    "description": "Ideal for growing businesses and agencies",
+                    "features": ["Unlimited pages", "All components", "Priority support", "10GB storage", "Advanced analytics", "Custom domains"],
+                    "highlight": true,
+                    "cta": "Try Free for 14 Days"
+                },
+                {
+                    "name": "Enterprise",
+                    "price": "$99",
+                    "period": "/month",
+                    "description": "For large organizations with complex needs",
+                    "features": ["Everything in Professional", "Dedicated support", "Unlimited storage", "Custom integrations", "Team collaboration", "SLA guarantee"],
+                    "highlight": false,
+                    "cta": "Contact Sales"
+                }
+            ];
+
+            const footerLinks = [
+                { "label": "Privacy Policy", "href": "#privacy" },
+                { "label": "Terms of Service", "href": "#terms" },
+                { "label": "Cookie Policy", "href": "#cookies" },
+                { "label": "Documentation", "href": "#docs" },
+                { "label": "Blog", "href": "#blog" },
+                { "label": "Careers", "href": "#careers" }
+            ];
+
+            // Reusable Render Functions
+            function renderNavItems(items, isMobile = false) {
+                return items.map(item => {
+                    const baseClasses = isMobile
+                        ? "flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+                        : "flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors";
+
+                    return `
+                    <li>
+                        <a href="${item.href}" 
+                           class="${baseClasses} text-gray-700 hover:text-primary nav-link"
+                           data-section="${item.id}">
+                            <i class="${item.icon} ${isMobile ? 'text-lg' : 'text-sm'}"></i>
+                            <span class="${isMobile ? 'text-base font-medium' : 'text-sm font-medium'}">${item.label}</span>
+                        </a>
+                    </li>
+                `;
+                }).join("");
+            }
+
+            function renderFeatures(items) {
+                return items.map(item => `
+                <div class="bg-white rounded-xl border border-gray-200 p-6 hover:border-primary hover:shadow-lg transition-all duration-300">
+                    <div class="flex items-start space-x-4">
+                        <div class="${item.color} text-2xl">
+                            <i class="${item.icon}"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-display font-semibold text-dark mb-2">${item.title}</h3>
+                            <p class="text-gray-600">${item.description}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+            }
+
+            function renderTestimonials(items) {
+                return items.map(item => {
+                    const stars = Array(item.rating).fill().map(() =>
+                        '<i class="fas fa-star text-yellow-400"></i>'
+                    ).join("");
+
+                    return `
+                    <div class="bg-white rounded-xl border border-gray-200 p-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="${item.avatar}" alt="${item.name}" class="w-12 h-12 rounded-full">
+                            <div>
+                                <h4 class="font-display font-semibold text-dark">${item.name}</h4>
+                                <p class="text-sm text-gray-600">${item.role} at ${item.company}</p>
+                            </div>
+                        </div>
+                        <div class="flex mb-3">${stars}</div>
+                        <p class="text-gray-700 italic">"${item.content}"</p>
+                    </div>
+                `;
+                }).join("");
+            }
+
+            function renderPricingCards(items) {
+                return items.map(item => `
+                <div class="${item.highlight ? 'bg-gradient-to-b from-primary to-secondary text-white transform -translate-y-2 shadow-2xl' : 'bg-white border border-gray-200'} rounded-2xl p-8 transition-all duration-300 hover:shadow-xl">
+                    ${item.highlight ? '<div class="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-medium mb-4">Most Popular</div>' : ''}
+                    <h3 class="text-2xl font-display font-bold mb-2">${item.name}</h3>
+                    <div class="mb-4">
+                        <span class="text-4xl font-bold">${item.price}</span>
+                        <span class="text-gray-${item.highlight ? '300' : '600'}">${item.period}</span>
+                    </div>
+                    <p class="${item.highlight ? 'text-gray-300' : 'text-gray-600'} mb-6">${item.description}</p>
+                    <ul class="space-y-3 mb-8">
+                        ${item.features.map(feature => `
+                            <li class="flex items-center space-x-3">
+                                <i class="fas fa-check ${item.highlight ? 'text-white' : 'text-green-500'}"></i>
+                                <span class="${item.highlight ? 'text-gray-300' : 'text-gray-700'}">${feature}</span>
+                            </li>
+                        `).join("")}
+                    </ul>
+                    <button class="w-full py-3 ${item.highlight ? 'bg-white text-primary hover:bg-gray-100' : 'bg-primary text-white hover:bg-secondary'} font-medium rounded-lg transition-colors">
+                        ${item.cta}
+                    </button>
+                </div>
+            `).join("");
+            }
+
+            function renderFooterLinks(items) {
+                return items.map(item => `
+                <li>
+                    <a href="${item.href}" class="text-gray-400 hover:text-white transition-colors">
+                        ${item.label}
+                    </a>
+                </li>
+            `).join("");
+            }
+
+            // DOM Initialization
+            document.addEventListener('DOMContentLoaded', function () {
+                // Render all content
+                document.getElementById('desktop-nav-list').innerHTML = renderNavItems(navigationItems);
+                document.getElementById('mobile-nav-list').innerHTML = renderNavItems(navigationItems, true);
+                document.getElementById('features-grid').innerHTML = renderFeatures(features);
+                document.getElementById('testimonials-grid').innerHTML = renderTestimonials(testimonials);
+                document.getElementById('pricing-cards').innerHTML = renderPricingCards(pricingPlans);
+                document.getElementById('footer-links').innerHTML = renderFooterLinks(footerLinks);
+
+                // Navigation State Management
+                const nav = document.getElementById('main-nav');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const navLinks = document.querySelectorAll('.nav-link');
+                let activeSection = 'home';
+
+                // Scroll event for navigation background change
+                window.addEventListener('scroll', function () {
+                    if (window.scrollY > 50) {
+                        nav.classList.add('nav-scrolled');
+                    } else {
+                        nav.classList.remove('nav-scrolled');
+                    }
+
+                    // Update active navigation item based on scroll position
+                    updateActiveNavItem();
+                });
+
+                // Mobile menu toggle
+                mobileMenuButton.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('mobile-menu-open');
+                    const icon = mobileMenuButton.querySelector('i');
+                    if (mobileMenu.classList.contains('mobile-menu-open')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+
+                // Navigation click handler with smooth scroll
+                document.addEventListener('click', function (event) {
+                    const link = event.target.closest('a[href^="#"]');
+                    if (!link) return;
+
+                    event.preventDefault();
+                    const targetId = link.getAttribute('href');
+
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        if (mobileMenu.classList.contains('mobile-menu-open')) {
+                            mobileMenu.classList.remove('mobile-menu-open');
+                            mobileMenuButton.querySelector('i').classList.remove('fa-times');
+                            mobileMenuButton.querySelector('i').classList.add('fa-bars');
+                        }
+
+                        // Smooth scroll to target
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+
+                        // Update active state
+                        updateActiveNavItem(targetId.substring(1));
+                    }
+                });
+
+                // Hover effects for navigation items
+                navLinks.forEach(link => {
+                    link.addEventListener('mouseenter', function () {
+                        this.style.transform = 'translateY(-2px)';
+                        this.style.transition = 'transform 0.2s ease';
+                    });
+
+                    link.addEventListener('mouseleave', function () {
+                        this.style.transform = 'translateY(0)';
+                    });
+                });
+
+                // CTA button hover effect
+                const ctaButton = document.getElementById('cta-button');
+                if (ctaButton) {
+                    ctaButton.addEventListener('mouseenter', function () {
+                        this.style.transform = 'translateY(-2px) scale(1.05)';
+                    });
+
+                    ctaButton.addEventListener('mouseleave', function () {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    });
+                }
+
+                // Function to update active navigation item
+                function updateActiveNavItem(sectionId = null) {
+                    if (sectionId) {
+                        activeSection = sectionId;
+                    } else {
+                        // Determine active section based on scroll position
+                        const sections = navigationItems.map(item => item.id);
+                        const scrollPosition = window.scrollY + 100;
+
+                        for (let i = sections.length - 1; i >= 0; i--) {
+                            const section = document.getElementById(sections[i]);
+                            if (section && section.offsetTop <= scrollPosition) {
+                                activeSection = sections[i];
+                                break;
+                            }
+                        }
+                    }
+
+                    // Update all navigation links
+                    navLinks.forEach(link => {
+                        const linkSection = link.getAttribute('data-section');
+                        if (linkSection === activeSection) {
+                            link.classList.add('nav-item-active');
+                            link.classList.remove('text-gray-700');
+                        } else {
+                            link.classList.remove('nav-item-active');
+                            link.classList.add('text-gray-700');
+                        }
+                    });
+                }
+
+                // Initialize active state
+                updateActiveNavItem();
+            });
+        </script>
+    </body>
+
+    </html>
+</artifact>
